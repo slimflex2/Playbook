@@ -1,0 +1,12 @@
+- hosts: all
+  handlers:
+   
+
+   - name: restart httpd
+     service:
+       name: httpd
+       state: restarted
+       
+
+  tasks: 
+    - include_tasks: "{{ ansible_os_family }}.yml" 

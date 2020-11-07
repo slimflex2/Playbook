@@ -1,0 +1,34 @@
+- name: install httpd
+  yum:
+    name: httpd
+    state: latest
+
+
+- name: install prerequisites
+  yum: 
+    name:
+      - vim
+      - wget
+      - unzip
+  register: yum
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+
+  
+
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+  notify: restart httpd
+  when: yum.changed
+
+- name:
+  reboot:
+  when: selinux.changed
+

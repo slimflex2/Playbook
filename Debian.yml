@@ -1,0 +1,19 @@
+- name: apt-get apache2
+  apt:
+    name: 
+      - apache2
+      - wget
+      - unzip
+    state: latest
+    update_cache: yes
+  register: yum
+- name: start apache2
+  service:
+    name: apache2
+    state: started
+  
+- name: restart apache2
+  service: 
+    name: apache2
+    state: restarted
+  when: yum.changed
